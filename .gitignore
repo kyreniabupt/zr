@@ -3460,3 +3460,5 @@ zr/__pycache__/__init__.cpython-310.pyc
 zr/__pycache__/settings.cpython-310.pyc
 zr/__pycache__/urls.cpython-310.pyc
 zr/__pycache__/wsgi.cpython-310.pyc
+polls/migrations/__pycache__/0002_stock_delete_product.cpython-310.pyc
+polls/migrations/__pycache__/0003_rename_volume_stock_total_trade_quantity_stock_last_and_more.cpython-310.pyc
