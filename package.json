@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "echarts": "^6.0.0",
     "element-ui": "^2.15.14"
   }
 }
