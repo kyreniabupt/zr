@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/
 """
 
 import os
-
+os.environ["LANGCHAIN_TRACING_V2"] = "false"
 from django.core.asgi import get_asgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "zr.settings")

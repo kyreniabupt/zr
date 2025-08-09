@@ -5172,3 +5172,10 @@ node_modules/zrender/src/tool/parseSVG.ts
 node_modules/zrender/src/tool/parseXML.ts
 node_modules/zrender/src/tool/path.ts
 node_modules/zrender/src/tool/transformPath.ts
+polls/rag/__pycache__/rag_chain.cpython-310.pyc
+.env
+chroma_db/chroma.sqlite3
+chroma_db/7fe052a0-ebda-4878-8139-3ff105131741/data_level0.bin
+chroma_db/7fe052a0-ebda-4878-8139-3ff105131741/header.bin
+chroma_db/7fe052a0-ebda-4878-8139-3ff105131741/length.bin
+chroma_db/7fe052a0-ebda-4878-8139-3ff105131741/link_lists.bin
