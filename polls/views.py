@@ -3,11 +3,14 @@ from .models import Stock
 from .serializers import StockSerializer
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.decorators import action
-from .rag.rag_chain import get_rag_answer
-from django.http import StreamingHttpResponse
+from .rag.rag import get_rag_answer
 from rest_framework.decorators import action
-from rest_framework.viewsets import ViewSet
-from rest_framework.request import Request
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+from rest_framework.parsers import JSONParser
+from django.http import StreamingHttpResponse
 
 class StockPagination(PageNumberPagination):
     page_size = 10
@@ -30,23 +33,19 @@ class get_all_stocks(viewsets.ModelViewSet):
 
         return queryset
 
-class RagViewSet(ViewSet):
-    @action(detail=False, methods=['post'])
-    def ask(self, request: Request):
-        question = request.data.get("question", "").strip()
-        if not question:
-            return StreamingHttpResponse(
-                '{"error":"Question is required"}',
-                status=400,
-                content_type="application/json"
-            )
+class RagViewSet(viewsets.ViewSet):
+    permission_classes = [AllowAny]
+    parser_classes = [JSONParser]
+
+    @action(detail=False, methods=["post"])
+    def chat(self, request):
+        user_message = request.data.get("message")
+        if not user_message:
+            return Response({"error": "Missing 'message' field"}, status=400)
 
         def stream():
-            try:
-                # get_rag_answer 返回生成器
-                for chunk in get_rag_answer(question):
-                    yield chunk
-            except Exception as e:
-                yield f"\nError: {str(e)}"
+
+            for chunk in get_rag_answer(user_message):
+                yield chunk
 
         return StreamingHttpResponse(stream(), content_type="text/plain")
